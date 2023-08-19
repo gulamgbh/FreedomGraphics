@@ -1,0 +1,103 @@
+/* error page */
+
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }
+/* home page */
+.home h3{
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.home img{
+    max-width: 16rem;
+    height: 5rem;
+}
+/* .home .slide{
+    padding: 19px;
+    
+} */
+.service{
+    background-color: #bfa9ac;
+    border-radius: 20px;
+}
+.hero-right {
+    background-color: #834e56;
+}
+.common{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.super{
+    padding-top: 70px;
+}
+
+.icon {
+    background-color: white;
+    padding: 6px;
+    border-radius: 20%;
+}
+
+.wlcm-text {
+    color: #834e56;
+}
+
+.hero-section-img-right img {
+    max-width: 85%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: -1.7%;
+}
+
+.hero-section-left {
+    padding: 10% 10%;
+}
+
+
+.hero-section-left .welcome {
+    margin: 2rem 0;
+    color: #834e56;
+}
+
+
+/* Button */
+Button {
+    background-color: #834e56;
+    color: white;
+    border-color: #834e56;
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding: 5px 9px;
+    border-radius: 9px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Navbar css */
+.cart-trolley--link {
+    position: relative;
+}
+
+.cart-trolley {
+    position: relative;
+    font-size: 2.2rem;
+}
+
+.cart-total--items {
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    background-color: #000;
+    color: #de1b1b;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    top: -20%;
+    left: 50%;
+    background-color: rgb(88, 184, 86);
+}
