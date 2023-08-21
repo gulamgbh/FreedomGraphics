@@ -1,3 +1,0 @@
-Create project command
-npx create-react-app
-youtube link --- https://www.youtube.com/watch?v=TTEg4mxOZ4g&t=154s
