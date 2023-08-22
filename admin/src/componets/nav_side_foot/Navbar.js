@@ -26,15 +26,16 @@ const Navbar = () => {
                     </NavLink>
 
                     {/* <!-- Avatar --> */}
+                    
                     <div className="dropdown">
-                        <a className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <NavLink className="btn btn-secondary dropdown-toggle" to="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp" className="rounded-circle"
                                 height="30" alt="Avatar" loading="lazy" />
                             <span className='text-uppercase p-2'>{Admin_Details.user.fullname}</span>
-                        </a>
-                        <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a className="dropdown-item" href="#">Profile</a></li>
-                            <li><a className="dropdown-item" href="#">Signout</a></li>
+                        </NavLink>
+                        <ul className="dropdown-menu mt-2" style={{ minWidth: "11.5rem" }} aria-labelledby="dropdownMenuLink">
+                            <li><NavLink className="collapse-item text-decoration-none text-white" href="#">Profile</NavLink></li>
+                            <li><NavLink className="collapse-item text-decoration-none text-white" href="#">Signout</NavLink></li>
                         </ul>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { productConstants, getProductBySlugConstants } from '../action/constants'
+import { productConstants } from '../action/constants'
 
 const initialState = {
   isLoading: false,

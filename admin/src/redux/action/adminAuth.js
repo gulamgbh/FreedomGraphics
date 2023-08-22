@@ -1,6 +1,6 @@
 import axios from "axios";
 import { authConstants } from "./constants";
-
+// const instance = axios.create();
 
 // Create Admin user
 export const registerAdminUser = (adminData) => {
@@ -9,7 +9,7 @@ export const registerAdminUser = (adminData) => {
     dispatch({
       type: authConstants.REGISTER_REQUEST
     });
-    await axios.post(`http://localhost:8000/api/admin/create-user`, {
+    await axios.post(`/admin/create-user`, {
       email,
       _password,
       first_name,
@@ -43,10 +43,11 @@ export const adminLogin = (admin_Login_Data) => {
     dispatch({
       type: authConstants.LOGIN_REQUEST
     });
-    const authRes = await axios.post(`http://localhost:8000/api/admin/signin`, {
+    const authRes = await axios.post(`/admin/signin`, {
       email,
       _password
     }).then(function (response) {
+      console.log("res",response);
       const token = response.data.token;
       const user = response.data.data;
       localStorage.setItem('admin_token', token);
@@ -60,31 +61,31 @@ export const adminLogin = (admin_Login_Data) => {
         }
       })
     }).catch(function (error) {
+      console.log("err",error);
+
       dispatch({
         type: authConstants.LOGIN_FAILURE,
         payload: {
-          message: error.response.data.message,
-          error: error.message
+          message: error.response.data.errors,
+          error: error.response.data.message
         }
       })
-      console.log(error);
     });
-
   }
 }
 
 
-// Admin verification
+// this code solve this issue
 export const isUserLoggedIn = () => {
   return async dispatch => {
     const token = localStorage.getItem('admin_token');
     if (token) {
-      const adminUser = JSON.parse(localStorage.getItem('admin_user'));
+      const user = JSON.parse(localStorage.getItem('admin_user'));
       dispatch({
         type: authConstants.LOGIN_SUCCESS,
         payload: {
           token,
-          adminUser
+          user
         }
       });
     } else {

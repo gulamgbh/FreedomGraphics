@@ -9,7 +9,11 @@ const Signin = () => {
     const dispatch = useDispatch()
     const [email, setEmail] = useState("")
     const [_password, setPassword] = useState("")
-    
+    useEffect(() => {
+        if (!Admin_Details.authenticate) {
+          dispatch(isUserLoggedIn());
+        }
+      }, [])
     const adminLoginData = async (e) => {
         e.preventDefault();
         const admin_Login_Data = {
@@ -37,7 +41,7 @@ const Signin = () => {
                                     <div className="card-body p-5 text-center">
                                         <div className="mb-md-5 mt-md-4 pb-5">
                                             <h2 className="fw-bold mb-2 text-uppercase">Admin Login</h2>
-                                            <p className="text-danger fw-bold mb-5">{Admin_Details.message}</p>
+                                            <p className="text-danger fw-bold mb-5">{Admin_Details.message==null?Admin_Details.error:Admin_Details.message}</p>
                                             <div className="form-outline form-white mb-4">
                                                 <FormInputModule typ="email" cn="form-control form-control-lg" val={email} onChange={e => setEmail(e.target.value)} />
                                                 <FormLabelModule cn="form-label" title="Email" />
