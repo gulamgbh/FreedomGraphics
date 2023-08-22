@@ -5,6 +5,9 @@ const Sidebar = () => {
     return (
         <>
             {/* <!-- Sidebar --> */}
+            <Link>
+                <h1>hiii</h1>
+            </Link>
             <nav id="sidebarMenu" className="collapse d-lg-block sidebar collapse bg-dark">
                 <div className="position-sticky">
                     <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion " id="accordionSidebar">
