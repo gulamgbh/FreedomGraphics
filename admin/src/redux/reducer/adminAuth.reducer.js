@@ -8,36 +8,14 @@ const initialState = {
     lastname: '',
     email: '',
   },
-  newuser: {
-    error: null,
-    message: ''
-  },
   authenticate: false,
   authenticating: false,
   loading: false,
   error: null,
   message: ''
 };
-
-export default (state = initialState, action) => {
+const AAR = (state = initialState, action) => {
   switch (action.type) {
-    case authConstants.REGISTER_FAILURE:
-      state = {
-        ...state,
-      }
-      break;
-    case authConstants.REGISTER_SUCCESS:
-      state = {
-        ...state,
-        user: {message:action.payload.message}
-      }
-      break;
-    case authConstants.REGISTER_FAILURE:
-      state = {
-        ...state,
-        user: {error:action.payload.error}
-      }
-      break;
     case authConstants.LOGIN_REQUEST:
       state = {
         ...state,
@@ -58,31 +36,33 @@ export default (state = initialState, action) => {
       state = {
         ...state,
         error: action.payload.error,
-        message: action.payload.message,
         authenticate: false,
         authenticating: true
       }
       break;
-    // case authConstants.LOGOUT_REQUEST:
-    //   state = {
-    //     ...state,
-    //     loading: true
-    //   }
-    //   break;
-    // case authConstants.LOGOUT_SUCCESS:
-    //   state = {
-    //     ...initialState,
-    //   }
-    //   break;
-    // case authConstants.LOGOUT_FAILURE:
-    //   state = {
-    //     ...state,
-    //     error: action.payload.error,
-    //     loading: false
-    //   }
-    //   break;
+    case authConstants.LOGOUT_REQUEST:
+      state = {
+        ...state,
+        loading: true
+      }
+      break;
+    case authConstants.LOGOUT_SUCCESS:
+      state = {
+        ...initialState,
+      }
+      break;
+    case authConstants.LOGOUT_FAILURE:
+      state = {
+        ...state,
+        error: action.payload.error,
+        loading: false
+      }
+      break;
+    default: state = {
+      ...state,
+    }
   }
   return state
 }
 
-
+export default AAR;

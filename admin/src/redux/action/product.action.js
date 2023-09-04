@@ -1,6 +1,9 @@
 import { productConstants } from './constants'
-import axios from 'axios';
+import axios from '../../helper/axios';
 
+
+
+// ------------------------
 export const getProductDetailsById = (payload) => {
   return async (dispatch) => {
     dispatch({
@@ -32,20 +35,21 @@ export const getAllProduct = () => {
     dispatch({
       type: productConstants.GET_ALL_PRODUCT_REQUEST,
     });
-    const productRes = await axios.get("http://localhost:8000/api/getAllProducts");
-    if (productRes.status === 200) {
+    await axios.get("/product/get-products").then(function (response) {
+      console.log(response);
       dispatch({
         type: productConstants.GET_ALL_PRODUCT_SUCCESS,
-        payload: productRes.data.getAllPro
-      })
-    } else {
-      dispatch({
-        type: productConstants.GET_ALL_PRODUCT_FAILURE,
         payload: {
-          message: "Api error",
+          products:response.data.findAllProduct,
+          message:response.data.message
         }
       })
-    }
+    }).catch(function (error) {
+      dispatch({
+        type: productConstants.GET_ALL_PRODUCT_FAILURE,
+        payload: error.data.error,
+      })
+    })
   };
 }
 

@@ -6,7 +6,7 @@ const initialState = {
   total_items: {},
   shipping_fee:20
 };
-export default (state = initialState, action) => {
+const CR = (state = initialState, action) => {
   switch (action.type) {
     case cartConstants.CART_ITEM_REQUEST:
       state = {
@@ -28,7 +28,10 @@ export default (state = initialState, action) => {
         loading: false,
       };
       break;
+      default: state = {
+        ...state,
+      }
   }
   return state
 }
-
+export default CR

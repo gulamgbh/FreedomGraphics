@@ -57,7 +57,28 @@ body {
   width: 240px;
   z-index: 600;
   }
-  
+
+  /* --------------------DataTable Css */
+  /* .dataTables_wrapper .dataTables_info{
+    color: white; 
+  }
+  label{
+    color: white;
+  }
+  .dataTables_wrapper .dataTables_filter input {
+    background-color: #565e64;
+    
+  }
+  .dataTables_wrapper .dataTables_length select {
+    background-color: #565e64;
+    color: white;
+  }
+  .table-striped>tbody>tr:nth-of-type(odd) {
+    color: white;
+  }
+  .even{
+    color: white;
+  } */
   @media (max-width: 991.98px) {
   .sidebar {
   width: 100%;

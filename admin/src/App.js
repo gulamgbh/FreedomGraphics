@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react'
 import './App.css'
-import { Profile, AddNewUsers, AllUsers, Dashboard, Protected, Signin } from "./componets";
+import { Profile, AddNewUsers, AllUsers, Dashboard, Protected, Signin, AddNewProduct, AllProducts, Categories } from "./componets";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { isUserLoggedIn } from './redux/action/adminAuth';
+import { isUserLoggedIn } from './redux/action/adminAuth.action';
+import { allUsersInfo } from './redux/action/getData.action';
+import { getAllCategories } from './redux/action/category.action';
+import { getAllProduct } from './redux/action/product.action';
 
 function App() {
   const Admin_Details = useSelector(state => state.adminAuth);
@@ -12,16 +15,33 @@ function App() {
     if (!Admin_Details.authenticate) {
       dispatch(isUserLoggedIn());
     }
-  })
+    dispatch(getAllCategories())
+    dispatch(allUsersInfo());
+    dispatch(getAllProduct());
+  },[])
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Protected />}>
+            {/* Dashboard Route */}
             <Route exact path="/" element={<Dashboard />} name="dashboard" />
+
+            {/* Dashboard Route */}
             <Route path="/profile" element={<Profile />} name="profile" />
+
+            {/* Users Route */}
             <Route path="/user-new" element={<AddNewUsers />} name="addnewuser" />
             <Route path="/users" element={<AllUsers />} name="allusers" />
+
+            {/* Producs Route */}
+            <Route path="/product-new" element={<AddNewProduct />} name="addnewproduct" />
+            <Route path="/products" element={<AllProducts />} name="allproducts" />
+            <Route path="/category" element={<Categories />} name="category" />
+
+            {/* Category Route */}
+            <Route path="/category" element={<Categories />} name="addnewcategory" />
+
           </Route>
           <Route path="/signin" element={<Signin />} name="signin" />
         </Routes>

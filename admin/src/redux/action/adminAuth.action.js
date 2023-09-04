@@ -1,53 +1,17 @@
 import axios from "axios";
 import { authConstants } from "./constants";
-// const instance = axios.create();
-
-// Create Admin user
-export const registerAdminUser = (adminData) => {
-  let { email, first_name, last_name, role, _password } = adminData
-  return async (dispatch) => {
-    dispatch({
-      type: authConstants.REGISTER_REQUEST
-    });
-    await axios.post(`/admin/create-user`, {
-      email,
-      _password,
-      first_name,
-      last_name,
-      role
-    }).then(function (response) {
-      dispatch({
-        type: authConstants.REGISTER_SUCCESS,
-        payload: {
-          message: response.data.message
-        }
-      })
-    }).catch(function (error) {
-      console.log(error);
-
-      dispatch({
-        type: authConstants.REGISTER_FAILURE,
-        payload: {
-          errors: error.response.data.errors,
-        }
-      })
-    });
-  }
-}
-
 
 // Admin login
 export const adminLogin = (admin_Login_Data) => {
-  let { email, _password } = admin_Login_Data
+  let { email, password } = admin_Login_Data
   return async (dispatch) => {
     dispatch({
       type: authConstants.LOGIN_REQUEST
     });
-    const authRes = await axios.post(`/admin/signin`, {
+    await axios.post(`/admin/signin`, {
       email,
-      _password
+      password
     }).then(function (response) {
-      console.log("res",response);
       const token = response.data.token;
       const user = response.data.data;
       localStorage.setItem('admin_token', token);
@@ -61,21 +25,55 @@ export const adminLogin = (admin_Login_Data) => {
         }
       })
     }).catch(function (error) {
-      console.log("err",error);
-
       dispatch({
         type: authConstants.LOGIN_FAILURE,
         payload: {
-          message: error.response.data.errors,
-          error: error.response.data.message
+          error: error.response.data.errors,
         }
       })
     });
   }
 }
 
+//Admin Signout 
+export const signout = () => {
+  return async dispatch => {
+    dispatch({
+      type: authConstants.LOGOUT_REQUEST
+    });
+    const token = localStorage.getItem('admin_token');
+    const logoutRes = await fetch('http://localhost:8000/api/admin/signout', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token ? `Bearer ${token}` : ''
+      },
+    });
+    const logoutData = await logoutRes.json();
+    if (logoutRes.status === 200) {
+      localStorage.removeItem('admin_user');
+      localStorage.removeItem('admin_token');
+      dispatch({
+        type: authConstants.LOGOUT_SUCCESS,
+        payload: {
+          message: 'Logout Successfully...'
+        }
+      });
+      // dispatch({
+      //   type: cartConstants.RESET_CART,
+      // });
+    } else {
+      dispatch({
+        type: authConstants.LOGOUT_FAILURE,
+        payload: {
+          error: logoutData.data.error
+        }
+      });
+    }
+  }
+}
 
-// this code solve this issue
+// Checking admin login or not
 export const isUserLoggedIn = () => {
   return async dispatch => {
     const token = localStorage.getItem('admin_token');
@@ -98,3 +96,4 @@ export const isUserLoggedIn = () => {
     }
   }
 }
+
