@@ -18,7 +18,6 @@ const Sidebar = () => {
                                     <div className="card card-body bg-dark  border border-white">
                                         <NavLink className="collapse-item text-decoration-none text-white" to="/users">All Users </NavLink>
                                         <NavLink className="collapse-item text-decoration-none text-white" to="/user-new">Add New</NavLink>
-                                        <NavLink className="collapse-item text-decoration-none text-white" to="/profile">Profile</NavLink>
                                     </div>
                                 </div>
                             </div>

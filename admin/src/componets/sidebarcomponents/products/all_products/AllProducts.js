@@ -1,5 +1,5 @@
 import React from 'react'
-import PageHeader from '../../../commonComponents/common';
+import {PageHeader} from '../../../commonComponents/common';
 import DataTable from 'datatables.net-dt';
 import Layout from '../../../layout/Layout';
 import { useDispatch, useSelector } from 'react-redux';
@@ -57,7 +57,7 @@ const AllProducts = () => {
                               <button type="button" className="btn btn-danger btn-sm fw-bold" onClick={() => is_deleteStatus(items._id, 1)}>Delete</button>
                             </div>
                             <div className='col-sm-12 col-md-12 col-lg-6'>
-                              <button type="button" className="btn btn-info btn-sm fw-bold">Edit</button>
+                              <button type="button" data-bs-toggle="tooltip" data-bs-placement="right" title={items._id} className="btn btn-info btn-sm fw-bold">Edit</button>
                             </div>
                           </div>
                         </td>

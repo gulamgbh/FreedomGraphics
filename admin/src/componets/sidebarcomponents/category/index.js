@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Layout from '../../layout/Layout';
-import PageHeader from '../../commonComponents/common';
+import {PageHeader} from '../../commonComponents/common';
 import { FormButtonModule, FormInputModule, FormLabelModule } from '../../commonComponents/form.module';
 import { addCategory } from '../../../redux/action/category.action';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ import RightPanelViewCat from './RightPanelViewCat';
 
 const Categories = () => {
     const category = useSelector(state => state.category);
+    const createAdminCategory = useSelector(state => state.addCategory);
     const [name, setName] = useState('');
     const [slug, setSlug] = useState('');
     const [featuredImg, setFeaturedImg] = useState('');
@@ -41,11 +42,17 @@ const Categories = () => {
     }
     return (
         <Layout>
+
             <div className="container-fluid bg-dark py-5">
                 <PageHeader cn="text-white fw-bold" pagetitle="CATEGORY" />
                 <div className='container-fluid px-4'>
                     <div className="row">
                         <div className='col-sm-12 col-md-4 col-lg-4 col-xxl-4 border'>
+                            <div className="text-center mt-2">
+                                {
+                                    createAdminCategory.message == "" ? <p className="text-danger fw-bold">{createAdminCategory.error}</p> : <p className="text-success fw-bold" >{createAdminCategory.message}</p>
+                                }
+                            </div>
                             <form onSubmit={addSaveCategory} encType='multipart/form-data'>
                                 <div className="form-group row">
                                     <div className="col-sm-12 mb-3">
@@ -68,7 +75,7 @@ const Categories = () => {
                                 <div className="form-group row">
                                     <div className="col-sm-12 mb-3">
                                         <FormLabelModule cn="form-label text-white" title="Select Parent Category" />
-                                        <select className="form-control form-control-lg"  onChange={(e) => setParentId(e.target.value)} value={parentId}>
+                                        <select className="form-control form-control-lg" onChange={(e) => setParentId(e.target.value)} value={parentId}>
                                             <option>Select Parent Category </option>
                                             {
                                                 createCategoryList(category.categories).map(option =>
@@ -78,6 +85,7 @@ const Categories = () => {
                                         </select>
                                     </div>
                                 </div>
+
                                 <div className='my-4'>
                                     <FormButtonModule cn="btn btn-outline-light btn-lg px-5" typ="submit" btntitle="Add Category" />
                                 </div>

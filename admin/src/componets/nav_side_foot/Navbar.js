@@ -30,13 +30,13 @@ const Navbar = () => {
                     {/* <!-- Avatar --> */}
                     <div className="dropdown">
                         <NavLink className="btn btn-secondary dropdown-toggle" to="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp" className="rounded-circle"
+                            <img src={Admin_Details.user.profile_pic} className="rounded-circle"
                                 height="30" alt="Avatar" loading="lazy" />
                             <span className='text-uppercase p-2'>{Admin_Details.user.fullname}</span>
                         </NavLink>
                         <ul className="dropdown-menu mt-2 p-2 border border-white" style={{ minWidth: "10.8rem", backgroundColor: "#212529" }} aria-labelledby="dropdownMenuLink">
                             <li><Link className="collapse-item text-decoration-none text-white" >{Admin_Details.user.email}</Link></li>
-                            <li><Link className="collapse-item text-decoration-none text-white" href="#">Profile</Link></li>
+                            <li><Link className="collapse-item text-decoration-none text-white" to="/profile">Profile</Link></li>
                             <li><Link className="collapse-item text-decoration-none text-white" onClick={logout}>Signout</Link></li>
                         </ul>
                     </div>

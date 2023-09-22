@@ -1,9 +1,11 @@
 import React from 'react'
 import Layout from '../../../layout/Layout'
 import DataTable from 'datatables.net-dt';
-import PageHeader from '../../../commonComponents/common';
+import {PageHeader} from '../../../commonComponents/common';
 import { useDispatch, useSelector } from 'react-redux';
 import { maintainIsDeleteStatus, maintainStatus } from '../../../../redux/action/status.action';
+import { FiEdit } from 'react-icons/fi';
+import { MdOutlineDeleteForever } from 'react-icons/md';
 
 
 
@@ -54,13 +56,9 @@ const AllUsers = () => {
                           }
                         </td>
                         <td>
-                          <div className='row'>
-                            <div className='col-sm-12 col-md-12 col-lg-6'>
-                              <button type="button" className="btn btn-danger btn-sm fw-bold" onClick={() => is_deleteStatus(data._id, 1)}>Delete</button>
-                            </div>
-                            <div className='col-sm-12 col-md-12 col-lg-6'>
-                              <button type="button" className="btn btn-info btn-sm fw-bold">Edit</button>
-                            </div>
+                          <div className='d-flex '>
+                              <button type="button" className="btn btn-danger btn-sm fw-bold mx-1" onClick={() => is_deleteStatus(data._id, 1)}><MdOutlineDeleteForever /></button>
+                              <button type="button" className="btn btn-info btn-sm fw-bold mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title={data._id} ><FiEdit /></button>
                           </div>
                         </td>
                       </tr> :

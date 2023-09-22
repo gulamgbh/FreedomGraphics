@@ -14,7 +14,7 @@ function TopRatedProducts() {
     return (
         <>
             <section style={{ marginTop: "5%", marginBottom: "5%", backgroundColor: "#eceff4" }}>
-                <div className='container' >
+                {/* <div className='container' >
                     <div className='row'>
                         <div className='col-sm-12 col-md-12 col-lg-12 py-5'>
                             <p className='fs-5 fw-bold wlcm-text'>CHECK NOW</p>
@@ -23,7 +23,7 @@ function TopRatedProducts() {
                     </div>
                     <div className='row d-flex pb-5'>
                         {
-                            featureProducts.map((items,index) =>
+                            featureProducts.map((items, index) =>
 
                                 <div className="card" key={index} style={{ width: "18rem", marginRight: 23 }}>
                                     <Link to={`/single-product/${items._id}`}>
@@ -31,14 +31,14 @@ function TopRatedProducts() {
                                         <div className="card-body">
                                             <p className="card-title fw-900 fs-5">{items.title}</p>
                                             <p className="card-title fw-900 fs-5"><PriceFormat price={items.price} /></p>
-                                            {/* <ButtonComponents btnname="ATC" cn="btn btn-block btn-sm fs-5 fw-bold mb-4" /> */}
+                                            <ButtonComponents btnname="ATC" cn="btn btn-block btn-sm fs-5 fw-bold mb-4" />
                                         </div>
                                     </Link>
                                 </div>
                             )
                         }
                     </div>
-                </div>
+                </div> */}
             </section>
         </>
     )

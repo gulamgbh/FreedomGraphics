@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from "../../helper/axios";
+
 import { authConstants } from "./constants";
 
 // Admin login
@@ -97,3 +98,29 @@ export const isUserLoggedIn = () => {
   }
 }
 
+export const updateAdminUser = (adminData2) => {
+  let { first_name, last_name, email } = adminData2
+ console.log(adminData2);
+  return async (dispatch) => {
+    dispatch({
+      type: authConstants.UPDATE_USER_REQUEST
+    });
+    await axios.post(`/admin/editprofile`, {adminData2}).then(function (response) {
+      console.log(response);
+      // dispatch({
+      //   type: authConstants.NEW_ADMIN_USER_SUCCESS,
+      //   payload: {
+      //     message: response.data.message
+      //   }
+      // })
+    }).catch(function (error) {
+      console.log(error);
+      // dispatch({
+      //   type: authConstants.NEW_ADMIN_USER_FAILURE,
+      //   payload: {
+      //     error: error.response.data.errors,
+      //   }
+      // })
+    });
+  }
+}

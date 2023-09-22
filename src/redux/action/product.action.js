@@ -1,30 +1,5 @@
 import { productConstants } from './constants'
-import axios from 'axios';
-
-export const getProductDetailsById = (payload) => {
-  return async (dispatch) => {
-    dispatch({
-      type: productConstants.GET_PRODUCT_DETAIL_BY_ID_REQUEST
-    });
-    const productByIdRes = await axios.get(`http://localhost:8000/api/product/${payload.params.productId}`);
-    if (productByIdRes.status === 200) {
-      dispatch({
-        type: productConstants.GET_PRODUCT_DETAIL_BY_ID_SUCCESS,
-        payload: {
-          productDetails: productByIdRes.data.product
-        }
-      });
-      // dispatch(getProducts());
-    } else {
-      dispatch({
-        type: productConstants.GET_PRODUCT_DETAIL_BY_ID_FAILURE,
-        payload: {
-          error: "Api error",
-        },
-      });
-    }
-  };
-};
+import axios from "../helper/axios";
 
 // -------------------------------------
 export const getAllProduct = () => {
@@ -32,21 +7,52 @@ export const getAllProduct = () => {
     dispatch({
       type: productConstants.GET_ALL_PRODUCT_REQUEST,
     });
-    const productRes = await axios.get("http://localhost:8000/api/getAllProducts");
-    if (productRes.status === 200) {
-      dispatch({
-        type: productConstants.GET_ALL_PRODUCT_SUCCESS,
-        payload: productRes.data.getAllPro
+    await axios.get("/product/get-products").then(
+      function (response) {
+        dispatch({
+          type: productConstants.GET_ALL_PRODUCT_SUCCESS,
+          payload: {
+            message: response.data.message,
+            findAllCat: response.data.findAllCat,
+            findAllProduct: response.data.findAllProduct
+          }
+        })
+      }).catch(function (error) {
+        dispatch({
+          type: productConstants.GET_ALL_PRODUCT_FAILURE,
+          payload: {
+            error: "Product is not found!",
+          }
+        })
       })
-    } else {
-      dispatch({
-        type: productConstants.GET_ALL_PRODUCT_FAILURE,
-        payload: {
-          message: "Api error",
-        }
-      })
-    }
   };
 }
 
+//-------------------------------------
+export const getProductDetailsById = (payload) => {
+  const { productId } = payload.params
+  return async (dispatch) => {
+    dispatch({
+      type: productConstants.GET_PRODUCT_DETAIL_BY_ID_REQUEST
+    });
+    await axios.post(`/product/get-product-by-id`, {
+      productId
+    }).then((response) => {
+      dispatch({
+        type: productConstants.GET_PRODUCT_DETAIL_BY_ID_SUCCESS,
+        payload: {
+          productDetails: response.data.product,
+          message: response.data.message
+        }
+      });
+    }).catch((error) => {
+      dispatch({
+        type: productConstants.GET_PRODUCT_DETAIL_BY_ID_FAILURE,
+        payload: {
+          error: "Technical error",
+        },
+      });
+    })
 
+  };
+};

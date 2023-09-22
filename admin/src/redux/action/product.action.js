@@ -36,7 +36,6 @@ export const getAllProduct = () => {
       type: productConstants.GET_ALL_PRODUCT_REQUEST,
     });
     await axios.get("/product/get-products").then(function (response) {
-      console.log(response);
       dispatch({
         type: productConstants.GET_ALL_PRODUCT_SUCCESS,
         payload: {

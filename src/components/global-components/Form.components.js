@@ -1,26 +1,72 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { AiOutlineLogout } from 'react-icons/ai';
+import { BiUserCircle } from 'react-icons/bi';
+import { BsCardChecklist } from 'react-icons/bs';
+import { IoIosArrowDown } from 'react-icons/io';
 
-function InputComponents(props) {
-    return (
-        <input id={props.id} className={props.cn} type={props.typ} placeholder={props.plh} name={props.nm} required />
-    )
-}
-
-function TextAreaComponents(props) {
+const TextAreaComponents = (props) => {
     return (
         <textarea id={props.id} className={props.cn} type={props.typ} placeholder={props.plh} name={props.nm} rows={props.rw} />
     )
 }
 
-function LabelComponents(props) {
+const FormInputModule = (props) => {
     return (
-        <label className={props.cn}>{props.lbn}</label>
+        <input
+            onClick={props.onClick}
+            checked={props.checked}
+            defaultValue={props.dv}
+            disabled={props.disabled}
+            onBlur={props.onBlur}
+            value={props.val}
+            type={props.typ}
+            name={props.nm}
+            className={props.cn}
+            onChange={props.onChange}
+            id={props.id}
+            placeholder={props.plh}
+        />
     )
 }
 
-function ButtonComponents(props) {
+const FormLabelModule = (props) => {
     return (
-        <button style={{backgroundColor:"#bfa9ac", }} type={props.typ} className={props.cn}>{props.btnname}</button>
+        <label className={props.cn}>{props.title}</label>
     )
 }
-export { InputComponents, TextAreaComponents, LabelComponents, ButtonComponents }
+const ButtonComponents = (props) => {
+    return (
+        <button style={{ backgroundColor: "#bfa9ac" }} type={props.typ} className={props.cn} id={props.id} onClick={props.onClick}>{props.btnname}</button>
+    )
+}
+
+const RadioComponents = (props) => {
+    return (
+        <>
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+            <label class="form-check-label" for="flexRadioDefault1">
+                Default radio
+            </label>
+        </>
+    )
+}
+
+const DropdownComponents = (props) => {
+    return (
+        <>
+            <div class="dropdown">
+                <button style={{ backgroundColor: "#bfa9ac" }} className={props.cn} type={props.typ} id={props.id} data-bs-toggle="dropdown" aria-expanded="false">
+                    {props.dropdownname} <IoIosArrowDown size={15} />
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><Link className="dropdown-item" to="/profile"><BiUserCircle size={23} /> My Profile</Link></li>
+                    <li><Link className="dropdown-item" to="#"><BsCardChecklist size={23} /> Orders</Link></li>
+                    <li><Link className="dropdown-item" to="#"><AiOutlineLogout size={23} /> {props.dropthree}</Link></li>
+                </ul>
+            </div>
+        </>
+    )
+}
+
+export { TextAreaComponents, ButtonComponents, FormInputModule, FormLabelModule, DropdownComponents, RadioComponents }

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import Layout from '../../../layout/Layout'
-import PageHeader from '../../../commonComponents/common'
+import {PageHeader} from '../../../commonComponents/common'
 import { FormButtonModule, FormInputModule, FormLabelModule } from '../../../commonComponents/form.module'
 import JoditEditor from 'jodit-react';
 import { useSelector, useDispatch } from 'react-redux'

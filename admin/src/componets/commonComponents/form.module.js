@@ -2,7 +2,7 @@ import React from 'react'
 
 const FormInputModule = (props) => {
     return (
-        <input onBlur={props.onBlur} value={props.val} type={props.typ} name={props.nm} className={props.cn} onChange={props.onChange} id={props.id}/>
+        <input defaultValue={props.dv} disabled={props.disabled} onBlur={props.onBlur} value={props.val} type={props.typ} name={props.nm} className={props.cn} onChange={props.onChange} id={props.id}/>
     )
 }
 

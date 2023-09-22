@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Navcomponent from './Nav.component'
-
+import fgl from '../logo.png'
 function Headercomponent() {
     return (
         <>
@@ -13,7 +13,7 @@ function Headercomponent() {
                             isPending ? "pending" : isActive ? "active" : ""
                         }
                     >
-                        <img src='./logo.png' alt='logo' />
+                        <img src={fgl} alt='logo' />
                     </NavLink>
                     <Navcomponent />
                 </div>

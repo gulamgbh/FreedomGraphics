@@ -5,7 +5,6 @@ const instance = axios.create({
     baseURL: 'http://localhost:8000/api',
     headers: {
         'Authorization': token ? `Bearer ${token}` : '',
-        "Content-Type": "multipart/form-data"
     }
 });
 // instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;

@@ -3,7 +3,7 @@ import axios from "../../helper/axios";
 
 
 // ---------------Find All Category----------------
-export const getAllCategories = (user) => {
+export const getAllCategories = () => {
   return async (dispatch) => {
     dispatch({
       type: categoryConstants.GET_ALL_CATEGORY_REQUEST,
@@ -33,7 +33,7 @@ export const addCategory = (formData) => {
     dispatch({
       type: categoryConstants.ADD_CATEGORY_REQUEST
     });
-    await axios.post('/category/create-category',formData
+    await axios.post('/category/create-category', formData
     ).then(function (response) {
       dispatch({
         type: categoryConstants.ADD_CATEGORY_SUCCESS,
@@ -42,78 +42,67 @@ export const addCategory = (formData) => {
           category: response.data.category,
         }
       })
+      dispatch(getAllCategories())
+
     }).catch(function (error) {
       dispatch({
         type: categoryConstants.ADD_CATEGORY_FAILURE,
         payload: {
-          message: error.message,
+          error: error.response.data.error,
         }
       })
     })
   }
 }
 
+// ---------------Update Category----------------
 
-// export const updatetdCategory = (formData) => {
-//   return async (dispatch) => {
-//     const token = localStorage.getItem('admin_token');
-//     dispatch({
-//       type: categoryConstants.UPDATE_CATEGORY_REQUEST
-//     });
-//     const categoryUpdateRes = await fetch('/admin/category/updatecategory', {
-//       method: "POST",
-//       headers: {
-//         "Authorization": token ? `Bearer ${token}` : ''
-//       },
-//       body: formData,
-//       ...formData
-//     });
-//     console.log('categoryUpdateRes', categoryUpdateRes);
-//     if (categoryUpdateRes.status === 201) {
-//       dispatch({
-//         type: categoryConstants.UPDATE_CATEGORY_SUCCESS
-//       });
-//       dispatch(getAllCategories())
-//     } else {
-//       dispatch({
-//         type: categoryConstants.UPDATE_CATEGORY_FAILURE,
-//         payload: {
-//           error: 'Something went wrong!!!!!',
-//         }
-//       });
-//     }
-//   }
-// }
+export const updatetdCategory = (formData) => {
+  return async (dispatch) => {
+    dispatch({
+      type: categoryConstants.UPDATE_CATEGORY_REQUEST
+    });
+    await axios.post('/category/updateCategory', formData
+    ).then(function (response) {
+      dispatch({
+        type: categoryConstants.UPDATE_CATEGORY_SUCCESS,
+        message:response.data.message,
+      });
+      dispatch(getAllCategories())
+    }).catch(function (error) {
+      dispatch({
+        type: categoryConstants.UPDATE_CATEGORY_FAILURE,
+        payload: {
+          error: error.message,
+        }
+      });
+    })
+  }
+}
 
+// ---------------Delete Category----------------
 
-// export const deleteCategoriesByCheckedExpanded = (ids) => {
-//   return async (dispatch) => {
-//     dispatch({
-//       type: categoryConstants.DELETE_CATEGORY_REQUEST
-//     });
-//     const token = localStorage.getItem('admin_token');
+export const deleteCategoriesByCheckedExpanded = (ids) => {
+  return async (dispatch) => {
+    dispatch({
+      type: categoryConstants.DELETE_CATEGORY_REQUEST
+    });
+    await axios.post('/category/deleteCategory', { payload: ids }
+    ).then(function (response) {
+      console.log(response);
+      // dispatch({
+      //   type: categoryConstants.DELETE_CATEGORY_SUCCESS
+      // });
+      // dispatch(getAllCategories())
+    }).catch(function (error) {
+      console.log(error);
+      // dispatch({
+      //   type: categoryConstants.DELETE_CATEGORY_FAILURE,
+      //   payload: {
+      //     error: 'Something went wrong!!!!!',
+      //   }
+      // });
 
-//     const categoryDeleteRes = await fetch('/admin/category/delete', {
-//       method: "POST",
-//       headers: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json',
-//         "Authorization": token ? `Bearer ${token}` : ''
-//       },
-//       body: JSON.stringify({ payload: ids })
-//     });
-//     if (categoryDeleteRes.status === 201) {
-//       dispatch({
-//         type: categoryConstants.DELETE_CATEGORY_SUCCESS
-//       });
-//       dispatch(getAllCategories())
-//     } else {
-//       dispatch({
-//         type: categoryConstants.DELETE_CATEGORY_FAILURE,
-//         payload: {
-//           error: 'Something went wrong!!!!!',
-//         }
-//       });
-//     }
-//   }
-// }
+    })
+  }
+}

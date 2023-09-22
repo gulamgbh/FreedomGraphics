@@ -9,7 +9,8 @@ export const registerAdminUser = (adminData) => {
       type: authConstants.NEW_ADMIN_USER_REQUEST
     });
     await axios.post(`/admin/create-user`, {
-      email, password, first_name, last_name, role
+      email, 
+      password, first_name, last_name, role
     }).then(function (response) {
       dispatch({
         type: authConstants.NEW_ADMIN_USER_SUCCESS,

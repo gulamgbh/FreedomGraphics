@@ -9,6 +9,10 @@ import ErrorIndexComponent from "./error";
 import ProductIndexComponent from "./product";
 import SingleProductIndexComponent from "./singleproduct";
 import CartIndexComponent from "./cart";
+import Login from "./authComponents/Login";
+import Signup from "./authComponents/Signup";
+import Protected from "./HOC/privateRoute";
+import ChackOut from "./order/ChackOut";
 
 
 export {
@@ -22,5 +26,9 @@ export {
     ContactIndexComponent,
     ErrorIndexComponent,
     ProductIndexComponent,
-    CartIndexComponent
+    CartIndexComponent,
+    Login,
+    Signup,
+    Protected,
+    ChackOut
 }

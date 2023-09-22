@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Layout from '../../../layout/Layout'
 import { FormButtonModule, FormInputModule, FormLabelModule } from '../../../commonComponents/form.module'
 import { useDispatch, useSelector } from 'react-redux';
 import { registerAdminUser } from '../../../../redux/action/createAdmin.action';
-import PageHeader from '../../../commonComponents/common';
+import {PageHeader} from '../../../commonComponents/common';
 var randomstring = require("randomstring");
 
 
 const AddNewUsers = () => {
-  // const [email, setEmail] = useState([
-  //   {
-  //     'first_name':"",
-  //     "sec":""
-  //   }
-  // ])
   const [email, setEmail] = useState("")
   const [first_name, setFirstname] = useState("")
   const [last_name, setLastname] = useState("")

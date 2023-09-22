@@ -18,11 +18,11 @@ function HeroComponents(props) {
                         </p>
                         <div>
                             <Link to="/products">
-                            <ButtonComponents
-                                typ="button"
-                                cn="btn btn-block fs-5 fw-bold mb-4"
-                                btnname="Shop"
-                            />
+                                <ButtonComponents
+                                    typ="button"
+                                    cn="btn btn-block fs-5 fw-bold mb-4"
+                                    btnname="Shop"
+                                />
                             </Link>
                         </div>
                     </div>

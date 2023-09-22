@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../../layout/Layout'
-import PageHeader from '../../commonComponents/common'
+import {PageHeader} from '../../commonComponents/common'
 const Dashboard = () => {
   return (
     <Layout>

@@ -6,6 +6,7 @@ import createAdminUser from './createAdmin.reducer'
 import fatchData from './getData.reducer'
 import categoryReducer from './category.reducer'
 import createProductReducer from './createProduct.reducer'
+import createCategoryReducer from './createCategory.reducer'
 // import orderReducer from './order.reducer'
 const rootReducer = combineReducers({
     category : categoryReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     adminAuth: adminAuthReducer,
     newAdminUser: createAdminUser,
     addProduct: createProductReducer,
+    addCategory: createCategoryReducer,
     cart: cartReducer,
     fatchDatas: fatchData,
     // order : orderReducer,
