@@ -9,6 +9,7 @@ const initialState = {
     email: '',
     avtar: '',
     role: '',
+    contact_number: '',
   },
   authenticate: false,
   authenticating: true,
@@ -43,6 +44,7 @@ const authReducer = (state = initialState, action) => {
         authenticating: true
       }
       break;
+
     case authConstants.REGISTER_REQUEST:
       state = {
         ...state,
@@ -62,6 +64,45 @@ const authReducer = (state = initialState, action) => {
         loading: true
       }
       break;
+
+    case authConstants.UPDATE_PROFILE_REQUEST:
+      state = {
+        ...state,
+        loading: true
+      }
+      break;
+    case authConstants.UPDATE_PROFILE_SUCCESS:
+      state = {
+        ...state,
+        user: action.payload.user,
+        message: action.payload.message,
+      }
+      break;
+    case authConstants.UPDATE_PROFILE_FAILURE:
+      state = {
+        ...state,
+        error: action.payload.error,
+        loading: true
+      }
+      break;
+
+    case authConstants.LOGOUT_REQUEST:
+      state = {
+        ...state,
+      }
+      break;
+    case authConstants.LOGOUT_SUCCESS:
+      state = {
+        ...initialState
+      }
+      break;
+    case authConstants.LOGOUT_FAILURE:
+      state = {
+        ...state,
+        error: action.payload.error,
+      }
+      break;
+
     default: state = {
       ...state,
     }

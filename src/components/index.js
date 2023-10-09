@@ -12,7 +12,11 @@ import CartIndexComponent from "./cart";
 import Login from "./authComponents/Login";
 import Signup from "./authComponents/Signup";
 import Protected from "./HOC/privateRoute";
-import ChackOut from "./order/ChackOut";
+import ChackOut from "./checkout/ChackOut";
+import Profile from "./authComponents/Profile";
+import Orders from "./order";
+import OrderDetails from "./order/OrderDetails";
+import ProductListPage from "./product/ProductListPage";
 
 
 export {
@@ -30,5 +34,9 @@ export {
     Login,
     Signup,
     Protected,
-    ChackOut
+    ChackOut,
+    Profile,
+    Orders,
+    OrderDetails,
+    ProductListPage
 }

@@ -14,6 +14,8 @@ const TextAreaComponents = (props) => {
 const FormInputModule = (props) => {
     return (
         <input
+            style={props.style}
+            ref={props.ref}
             onClick={props.onClick}
             checked={props.checked}
             defaultValue={props.dv}
@@ -55,14 +57,20 @@ const RadioComponents = (props) => {
 const DropdownComponents = (props) => {
     return (
         <>
-            <div class="dropdown">
+            <div className="dropdown">
                 <button style={{ backgroundColor: "#bfa9ac" }} className={props.cn} type={props.typ} id={props.id} data-bs-toggle="dropdown" aria-expanded="false">
                     {props.dropdownname} <IoIosArrowDown size={15} />
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><Link className="dropdown-item" to="/profile"><BiUserCircle size={23} /> My Profile</Link></li>
-                    <li><Link className="dropdown-item" to="#"><BsCardChecklist size={23} /> Orders</Link></li>
-                    <li><Link className="dropdown-item" to="#"><AiOutlineLogout size={23} /> {props.dropthree}</Link></li>
+                    <li>
+                        <Link className="dropdown-item" to="/profile"><BiUserCircle size={23} /> My Profile</Link>
+                    </li>
+                    <li>
+                        <Link className="dropdown-item" to="/orders"><BsCardChecklist size={23} /> Orders</Link>
+                    </li>
+                    <li>
+                        <Link className="dropdown-item" onClick={props.onClickThree}><AiOutlineLogout size={23} /> {props.dropthree}</Link>
+                    </li>
                 </ul>
             </div>
         </>

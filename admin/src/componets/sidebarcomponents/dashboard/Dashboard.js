@@ -14,9 +14,9 @@ const Dashboard = () => {
               </div>
               <div className='card-body d-flex flex-column justify-content-end'>
                 <div className='row '>
-                  <div class="col">
-                    <p class="font-sans-serif lh-1 mb-1 fs-4">$47K</p>
-                    <span class="badge badge-soft-success rounded-pill fs--2">+3.5%</span>
+                  <div className="col">
+                    <p className="font-sans-serif lh-1 mb-1 fs-4">$47K</p>
+                    <span className="badge badge-soft-success rounded-pill fs--2">+3.5%</span>
                   </div>
                   <div className='col-auto ps-0'></div>
                 </div>

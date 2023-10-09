@@ -37,10 +37,10 @@ const CheckOutSteps = (props) => {
         dispatch(addDeliveryAddress(payload))
     }
 
-
     const addAddress = () => {
         setAddAddressModal(true)
     }
+
     const renderAddAddressModel = () => {
         return (
             <CommonModal
@@ -133,8 +133,9 @@ const CheckOutSteps = (props) => {
             </CommonModal>
         );
     }
+    
     return (
-        <div className="card mb-4">
+        <div className="card mb-4" >
             <div className={`card-header d-flex justify-content-between ${props.active && 'active'}`}>
                 <div className='d-flex'>
                     <p className='border px-2 border-danger stepNumber'>{props.stepNumber}</p>
@@ -149,11 +150,9 @@ const CheckOutSteps = (props) => {
                             onClick={addAddress}
                         /> : null
                     }
-
                 </div>
-
             </div>
-            <div className="card-body">
+            <div className="card-body border-success">
                 {
                     props.body && props.body
                 }

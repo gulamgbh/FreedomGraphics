@@ -42,35 +42,23 @@ export const signout = () => {
     dispatch({
       type: authConstants.LOGOUT_REQUEST
     });
-    const token = localStorage.getItem('admin_token');
-    const logoutRes = await fetch('http://localhost:8000/api/admin/signout', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": token ? `Bearer ${token}` : ''
-      },
-    });
-    const logoutData = await logoutRes.json();
-    if (logoutRes.status === 200) {
-      localStorage.removeItem('admin_user');
-      localStorage.removeItem('admin_token');
+    await axios.post(`/admin/signout`).then((response) => {
+      localStorage.clear()
       dispatch({
         type: authConstants.LOGOUT_SUCCESS,
         payload: {
-          message: 'Logout Successfully...'
+          message: response.data.message
         }
-      });
-      // dispatch({
-      //   type: cartConstants.RESET_CART,
-      // });
-    } else {
+      })
+      dispatch(isUserLoggedIn())
+    }).catch((error) => {
       dispatch({
         type: authConstants.LOGOUT_FAILURE,
         payload: {
-          error: logoutData.data.error
+          error: error.data.error
         }
       });
-    }
+    })
   }
 }
 
@@ -98,29 +86,58 @@ export const isUserLoggedIn = () => {
   }
 }
 
-export const updateAdminUser = (adminData2) => {
-  let { first_name, last_name, email } = adminData2
- console.log(adminData2);
+
+
+export const getProfileData = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: authConstants.GET_PROFILE_REQUEST
+    });
+    await axios.get(`/admin/getProfile`).then(function (response) {
+      dispatch({
+        type: authConstants.GET_PROFILE_SUCCESS,
+        payload: {
+          user: response.data.data,
+          message: response.data.message
+        }
+      })
+    }).catch(function (error) {
+      dispatch({
+        type: authConstants.GET_PROFILE_FAILURE,
+        payload: {
+          error: error.data.errors,
+        }
+      })
+    });
+  }
+}
+
+
+
+export const updateAdminUser = (formData) => {
   return async (dispatch) => {
     dispatch({
       type: authConstants.UPDATE_USER_REQUEST
     });
-    await axios.post(`/admin/editprofile`, {adminData2}).then(function (response) {
-      console.log(response);
-      // dispatch({
-      //   type: authConstants.NEW_ADMIN_USER_SUCCESS,
-      //   payload: {
-      //     message: response.data.message
-      //   }
-      // })
-    }).catch(function (error) {
-      console.log(error);
-      // dispatch({
-      //   type: authConstants.NEW_ADMIN_USER_FAILURE,
-      //   payload: {
-      //     error: error.response.data.errors,
-      //   }
-      // })
+    await axios.post(`/admin/editprofile`, formData).then((response) => {
+      const user = response.data.data;
+      localStorage.setItem('admin_user', JSON.stringify(user));
+      dispatch({
+        type: authConstants.UPDATE_USER_SUCCESS,
+        payload: {
+          user,
+          message: response.data.message
+        }
+      })
+      dispatch(getProfileData())
+    }).catch((error) => {
+      dispatch({
+        type: authConstants.UPDATE_USER_FAILURE,
+        payload: {
+          error: error.response.data.errors,
+        }
+      })
     });
   }
 }
+

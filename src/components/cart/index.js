@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import CartItemsData from './CartItems';
 import PriceSummary from '../global-components/PriceSummary';
 
@@ -30,7 +30,24 @@ const CartIndexComponent = (props) => {
                             </div>
                         </div>
                     </div>
-                    <PriceSummary link="/checkout"/>
+                    <PriceSummary
+                        link="/checkout"
+                        totalItem={
+                            Object.keys(cart.cartItems).reduce(
+                                function (qty, key) {
+                                    return qty + cart.cartItems[key].qty;
+                                }, 0
+                            )
+                        }
+                        totalPrice={
+                            Object.keys(cart.cartItems).reduce(
+                                (totalPrice, key) => {
+                                    const { selling_price, qty } = cart.cartItems[key];
+                                    return totalPrice + selling_price * qty;
+                                }, 0
+                            )
+                        }
+                    />
                 </div>
             </div>
         </>

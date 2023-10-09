@@ -38,6 +38,9 @@ const Sidebar = () => {
                         <div className="list-group list-group-flush mx-3 ">
                             <NavLink className="btn btn-secondary" to="/category">Categories</NavLink>
                         </div>
+                        <div className="list-group list-group-flush mx-3 mt-3">
+                            <NavLink className="btn btn-secondary" to="/orders">Orders</NavLink>
+                        </div>
                     </ul>
                 </div>
             </nav>

@@ -8,6 +8,8 @@ const initialState = {
     lastname: '',
     email: '',
     avtar: '',
+    role: '',
+    contact_number: '',
   },
   authenticate: false,
   authenticating: false,
@@ -44,19 +46,38 @@ const AAR = (state = initialState, action) => {
     case authConstants.LOGOUT_REQUEST:
       state = {
         ...state,
-        loading: true
       }
       break;
     case authConstants.LOGOUT_SUCCESS:
       state = {
-        ...initialState,
+        ...initialState
       }
       break;
     case authConstants.LOGOUT_FAILURE:
       state = {
         ...state,
         error: action.payload.error,
-        loading: false
+      }
+      break;
+
+    case authConstants.UPDATE_USER_REQUEST:
+      state = {
+        ...state,
+        loading: true
+      }
+      break;
+    case authConstants.UPDATE_USER_SUCCESS:
+      state = {
+        ...state,
+        user: action.payload.user,
+        message: action.payload.message,
+      }
+      break;
+    case authConstants.UPDATE_USER_FAILURE:
+      state = {
+        ...state,
+        error: action.payload.error,
+        loading: true
       }
       break;
     default: state = {

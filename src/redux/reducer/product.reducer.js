@@ -2,13 +2,16 @@ import { productConstants } from '../action/constants'
 
 const initialState = {
   products: [],
+  productByCatSlug: [],
   productsByPrice: {
     under500: [],
     under5k: [],
-    under10k: []
+    under10k: [],
+    under20k: [],
   },
   productDetails: {},
   loading: true,
+  error: "",
   message: ''
 };
 export default (state = initialState, action) => {
@@ -33,6 +36,7 @@ export default (state = initialState, action) => {
         loading: true
       }
       break;
+
     case productConstants.GET_PRODUCT_DETAIL_BY_ID_REQUEST:
       state = {
         ...state,
@@ -51,21 +55,34 @@ export default (state = initialState, action) => {
       state = {
         ...state,
         error: action.payload.error,
-        loading: false,
+        loading: true,
       };
       break;
-    // case productConstants.GET_PRODUCT_BY_SLUG:
-    //   state = {
-    //     ...state,
-    //     products: action.payload.products,
-    //     productsByPrice: {
-    //       ...action.payload.productsByPrice
-    //     },
-    //     loading: false,
-    //     message: action.payload.message
-    //   }
-    //   break;
 
+    case productConstants.GET_PRODUCT_BY_CAT_SLUG_REQUEST:
+      state = {
+        ...state,
+        loading: true,
+      };
+      break;
+    case productConstants.GET_PRODUCT_BY_CAT_SLUG_SUCCESS:
+      state = {
+        ...state,
+        productByCatSlug: action.payload.productByCatSlug,
+        productsByPrice: {
+          ...action.payload.productsByPrice
+        },
+        loading: false,
+        message: action.payload.message
+      }
+      break;
+    case productConstants.GET_PRODUCT_BY_CAT_SLUG_FAILURE:
+      state = {
+        ...state,
+        error: action.payload.error,
+        loading: true,
+      };
+      break;
 
   }
   return state

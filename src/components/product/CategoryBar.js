@@ -9,7 +9,7 @@ function CategoryBar() {
         for (let category of categories) {
             myCategories.push(
                 <li key={category._id}>
-                    {category.parentId ? <Link to={`/${category.slug}?cid=${category._id}`}>{category.name}</Link> : <span>{category.name}</span>}
+                    {category.parentId ? <Link to={`/${category.slug}?cid=${category._id}&cname=${category.slug}`}>{category.name}</Link> : <span>{category.name}</span>}
                     {category.children.length > 0 ? (<ul className="">{renderCategories(category.children)}</ul>) : null}
                 </li>
             )

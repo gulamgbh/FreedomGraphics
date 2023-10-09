@@ -12,9 +12,10 @@ import { BiArrowBack } from 'react-icons/bi';
 import { PriceFormat } from '../global-components/PriceFormat';
 import Rating from './Rating';
 function SingleProductIndexComponent() {
+    const productDetail = useSelector(state => state.product.productDetails)
+    const productLoading = useSelector(state => state.product.loading)
     let history = useNavigate();
     const htmlParser = new Parser();
-    const productDetail = useSelector(state => state.product.productDetails)
     const dispatch = useDispatch();
     const params = useParams();
     useEffect(() => {
@@ -29,11 +30,11 @@ function SingleProductIndexComponent() {
     if (Object.keys(productDetail).length === 0) {
         return null;
     }
-    // if (loading) {
-    //     return <div className="spinner-border" role="status">
-    //         <span className="visually-hidden">Loading...</span>
-    //     </div>
-    // }
+    if (productLoading) {
+        return <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+        </div>
+    }
     return (
         <>
             <div className="container my-3 ">

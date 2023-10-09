@@ -7,6 +7,7 @@ import Protected from "./HOC/privateRoute";
 import AddNewProduct from "./sidebarcomponents/products/add_new/AddNew";
 import AllProducts from "./sidebarcomponents/products/all_products/AllProducts";
 import Categories from "./sidebarcomponents/category";
+import Orders from "./sidebarcomponents/orders/Orders";
 
 export {
     AllProducts,
@@ -17,5 +18,6 @@ export {
     Profile,
     AddNewUsers,
     AllUsers,
-    Categories
+    Categories,
+    Orders
 }

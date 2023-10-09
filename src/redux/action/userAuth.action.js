@@ -1,6 +1,29 @@
 import axios from "../helper/axios";
 import { authConstants, cartConstants } from "./constants";
 
+export const getProfileData = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: authConstants.GET_PROFILE_REQUEST
+    });
+    await axios.get(`/getProfile`).then(function (response) {
+      dispatch({
+        type: authConstants.GET_PROFILE_SUCCESS,
+        payload: {
+          user: response.data.data,
+          message: response.data.message
+        }
+      })
+    }).catch(function (error) {
+      dispatch({
+        type: authConstants.GET_PROFILE_FAILURE,
+        payload: {
+          error: error.data.errors,
+        }
+      })
+    });
+  }
+}
 // ----------------Create User-------------------
 export const registerUser = (adminData) => {
   const { email, password, confirm_pwd, contact_number, first_name, last_name } = adminData
@@ -89,36 +112,55 @@ export const signout = () => {
     dispatch({
       type: authConstants.LOGOUT_REQUEST
     });
-    // const token = localStorage.getItem('guest_token');
-    // const logoutRes = await fetch('/user/signout', {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Authorization": token ? `Bearer ${token}` : ''
-    //   },
-    // });
-    // const logoutData = await logoutRes.json();
-    // if (logoutRes.status === 200) {
-    // localStorage.removeItem('guest_user');
-    // localStorage.removeItem('guest_token');
-    localStorage.clear()
-    dispatch({
-      type: authConstants.LOGOUT_SUCCESS,
-      payload: {
-        message: 'Logout Successfully...'
-      }
-    });
-    dispatch({
-      type: cartConstants.RESET_CART_SUCCESS,
-    });
-    // } else {
-    //   dispatch({
-    //     type: authConstants.LOGOUT_FAILURE,
-    //     payload: {
-    //       error: logoutData.data.error
-    //     }
-    //   });
-    // }
-
+    await axios.post(`/signout`).then((response) => {
+      localStorage.clear()
+      dispatch({
+        type: authConstants.LOGOUT_SUCCESS,
+        payload: {
+          message: response.data.message
+        }
+      })
+      dispatch(isUserLoggedIn())
+      dispatch({
+        type: cartConstants.RESET_CART_SUCCESS,
+      });
+    }).catch((error) => {
+      dispatch({
+        type: authConstants.LOGOUT_FAILURE,
+        payload: {
+          error: error.data.error
+        }
+      });
+    })
   }
 }
+
+export const updateProfileData = (formData) => {
+  return async (dispatch) => {
+    dispatch({
+      type: authConstants.UPDATE_PROFILE_REQUEST
+    });
+    await axios.put(`/editProfile`, formData).then(function (response) {
+      const user = response.data.data;
+      localStorage.setItem('user_info', JSON.stringify(user));
+      dispatch({
+        type: authConstants.UPDATE_PROFILE_SUCCESS,
+        payload: {
+          user,
+          message: response.data.message
+        }
+      })
+      dispatch(getProfileData())
+    }).catch(function (error) {
+      dispatch({
+        type: authConstants.UPDATE_PROFILE_FAILURE,
+        payload: {
+          error: error.data.errors,
+        }
+      })
+    });
+  }
+}
+
+
+

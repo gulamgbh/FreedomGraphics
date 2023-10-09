@@ -37,17 +37,41 @@ const CommonModal = (props) => {
 const Breadcrumb = () => {
   return (
     <div className="row">
-          <div className="col">
-            <nav aria-label="breadcrumb" className="bg-light rounded-3 p-3 mb-4">
-              <ol className="breadcrumb mb-0">
-                <li className="breadcrumb-item"><a href="#">Home</a></li>
-                <li className="breadcrumb-item"><a href="#">User</a></li>
-                <li className="breadcrumb-item active" aria-current="page">User Profile</li>
-              </ol>
-            </nav>
-          </div>
-        </div>
+      <div className="col">
+        <nav aria-label="breadcrumb" className="bg-light rounded-3 p-3 mb-4">
+          <ol className="breadcrumb mb-0">
+            <li className="breadcrumb-item"><a href="#">Home</a></li>
+            <li className="breadcrumb-item"><a href="#">User</a></li>
+            <li className="breadcrumb-item active" aria-current="page">User Profile</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
   )
 }
 
-export { PageHeader, CommonModal,Breadcrumb }
+const OrderCard = (props) => {
+  return (
+    <div className="card" {...props}>
+      {(props.headerLeft || props.headerRight) && (
+        <div className="cardHeader">
+          {props.headerLeft && <div>{props.headerLeft}</div>}
+          {props.headerRight && props.headerRight}
+        </div>
+      )}
+
+      {props.children}
+    </div>
+  );
+};
+
+const PriceFormat = ({price}) => {
+  return (
+    new Intl.NumberFormat("en-IN",{
+        style:"currency",
+        currency:"INR",
+        maximumFractionDigits:2
+    }).format(price/2)
+  )
+}
+export { PageHeader, CommonModal, Breadcrumb, OrderCard, PriceFormat }

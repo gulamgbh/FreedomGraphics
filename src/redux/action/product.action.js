@@ -53,6 +53,33 @@ export const getProductDetailsById = (payload) => {
         },
       });
     })
+  };
+};
 
+//-------------------------------------
+export const getProductByCatSlug = (params) => {
+  return async (dispatch) => {
+    dispatch({
+      type: productConstants.GET_PRODUCT_BY_CAT_SLUG_REQUEST
+    });
+    await axios.post(`/productCatBySlug`, {
+      params
+    }).then((response) => {
+      dispatch({
+        type: productConstants.GET_PRODUCT_BY_CAT_SLUG_SUCCESS,
+        payload: {
+          productByCatSlug: response.data.products,
+          productsByPrice: response.data.productsByPrice,
+          message: response.data.message
+        }
+      });
+    }).catch((error) => {
+      dispatch({
+        type: productConstants.GET_PRODUCT_BY_CAT_SLUG_FAILURE,
+        payload: {
+          error: error.response.data.error
+        },
+      });
+    })
   };
 };

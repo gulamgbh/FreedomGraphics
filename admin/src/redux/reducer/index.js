@@ -7,7 +7,7 @@ import fatchData from './getData.reducer'
 import categoryReducer from './category.reducer'
 import createProductReducer from './createProduct.reducer'
 import createCategoryReducer from './createCategory.reducer'
-// import orderReducer from './order.reducer'
+import orderReducer from './order.reducer'
 const rootReducer = combineReducers({
     category : categoryReducer,
     product: productReducer,
@@ -17,6 +17,6 @@ const rootReducer = combineReducers({
     addCategory: createCategoryReducer,
     cart: cartReducer,
     fatchDatas: fatchData,
-    // order : orderReducer,
+    order : orderReducer,
 })
 export default rootReducer
